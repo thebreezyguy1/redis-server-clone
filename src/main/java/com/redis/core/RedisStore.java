@@ -16,7 +16,7 @@ public class RedisStore {
 
     public void set(String key, String value) {
         if (key != null) {
-            ValueEntry valueEntry = new ValueEntry(value, -1);
+            ValueEntry valueEntry = new ValueEntry(value, -1, DataType.STRING);
             store.put(key, valueEntry);
         }
     };
@@ -24,7 +24,7 @@ public class RedisStore {
     public void set(String key, String value, long ttlMillis) {
         if (key != null) {
             long expiresAt = System.currentTimeMillis() + ttlMillis;
-            ValueEntry valueEntry = new ValueEntry(value, expiresAt);
+            ValueEntry valueEntry = new ValueEntry(value, expiresAt, DataType.STRING);
             store.put(key, valueEntry);
         }
     }
@@ -49,6 +49,7 @@ public class RedisStore {
     }
 
     public boolean exists(String key) {
+        if (key == null) return false;
         if (!store.containsKey(key)) return false;
         if (isExpired(key)) {
             store.remove(key);
@@ -109,13 +110,10 @@ public class RedisStore {
         return (entry.getExpiresAt() - System.currentTimeMillis()) / 1000;
     }
 
-    public String type(String key) {
+    public DataType type(String key) {
         ValueEntry entry = store.get(key);
-        if (entry == null || isExpired(key)) {
-            return "none";
-        }
-
-        return "string";
+        if (entry == null || isExpired(key)) return DataType.NONE;
+        return entry.getType();
     }
 
     public void evictExpiredKeys() {

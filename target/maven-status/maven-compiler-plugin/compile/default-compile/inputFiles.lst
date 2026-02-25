@@ -1,3 +1,4 @@
+/Users/thebreezyguy/redis-server/src/main/java/com/redis/core/DataType.java
 /Users/thebreezyguy/redis-server/src/main/java/com/redis/core/ExpiryManager.java
 /Users/thebreezyguy/redis-server/src/main/java/com/redis/core/RedisStore.java
 /Users/thebreezyguy/redis-server/src/main/java/com/redis/core/ValueEntry.java

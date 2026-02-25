@@ -23,7 +23,7 @@ public class ExpiryManager {
         task = scheduler.scheduleAtFixedRate(
             this::sweep, 
             0, 
-            0, 
+            100, 
             TimeUnit.MILLISECONDS
         );
     }

@@ -1,21 +1,22 @@
 package com.redis.core;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 class RedisStoreTest {
+
     private RedisStore store;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         store = new RedisStore();
     }
 
-    // --- SET / GET --------------------------
+    // ── SET / GET ───────────────────────────────────────────────────────
 
     @Test
     void set_and_get_basic_value() {
@@ -47,7 +48,7 @@ class RedisStoreTest {
         assertEquals("", store.get("empty"));
     }
 
-    // --- TL / EXPIRY ------------------------------
+    // ── TTL / EXPIRY ────────────────────────────────────────────────────
 
     @Test
     void get_returns_null_after_ttl_expires() throws InterruptedException {
@@ -70,7 +71,7 @@ class RedisStoreTest {
         assertEquals("here", store.get("persistent"));
     }
 
-    // --- DEL --------------------------------------
+    // ── DEL ─────────────────────────────────────────────────────────────
 
     @Test
     void del_removes_existing_key() {
@@ -103,7 +104,7 @@ class RedisStoreTest {
         assertNull(store.get("z"));
     }
 
-    // --- EXISTS --------------------------------
+    // ── EXISTS ──────────────────────────────────────────────────────────
 
     @Test
     void exists_returns_true_for_present_key() {
@@ -111,8 +112,14 @@ class RedisStoreTest {
         assertTrue(store.exists("here"));
     }
 
+    @Test
     void exists_returns_false_for_missing_key() {
         assertFalse(store.exists("ghost"));
+    }
+
+    @Test
+    void exists_returns_false_for_null_key() {
+        assertFalse(store.exists(null));
     }
 
     @Test
@@ -127,7 +134,7 @@ class RedisStoreTest {
     @Test
     void expire_sets_ttl_on_existing_key() throws InterruptedException {
         store.set("key", "value");
-        boolean result = store.expire("key", 1); // 1 second
+        boolean result = store.expire("key", 1);
         assertTrue(result);
         Thread.sleep(1100);
         assertNull(store.get("key"));
@@ -151,10 +158,9 @@ class RedisStoreTest {
 
     @Test
     void ttl_returns_remaining_seconds() throws InterruptedException {
-        store.set("key", "value", 5000); // 5 second TTL
+        store.set("key", "value", 5000);
         Thread.sleep(100);
         long remaining = store.ttl("key");
-        // should be close to 4 seconds remaining
         assertTrue(remaining >= 3 && remaining <= 5);
     }
 
@@ -192,7 +198,7 @@ class RedisStoreTest {
     void keys_question_mark_matches_single_char() {
         store.set("hello", "1");
         store.set("hallo", "2");
-        store.set("heello", "3"); // two e's — should NOT match h?llo
+        store.set("heello", "3");
         List<String> result = store.keys("h?llo");
         assertEquals(2, result.size());
         assertTrue(result.containsAll(List.of("hello", "hallo")));
@@ -229,7 +235,6 @@ class RedisStoreTest {
     void keys_handles_regex_special_chars_in_pattern() {
         store.set("file.txt", "1");
         store.set("filetxt", "2");
-        // the dot should be treated as a literal, not a regex wildcard
         List<String> result = store.keys("file.txt");
         assertEquals(1, result.size());
         assertEquals("file.txt", result.get(0));
@@ -240,19 +245,19 @@ class RedisStoreTest {
     @Test
     void type_returns_string_for_existing_key() {
         store.set("name", "dorian");
-        assertEquals("string", store.type("name"));
+        assertEquals(DataType.STRING, store.type("name"));
     }
 
     @Test
     void type_returns_none_for_missing_key() {
-        assertEquals("none", store.type("ghost"));
+        assertEquals(DataType.NONE, store.type("ghost"));
     }
 
     @Test
     void type_returns_none_for_expired_key() throws InterruptedException {
         store.set("temp", "value", 100);
         Thread.sleep(200);
-        assertEquals("none", store.type("temp"));
+        assertEquals(DataType.NONE, store.type("temp"));
     }
 
     // ── EVICTION ────────────────────────────────────────────────────────
@@ -301,7 +306,7 @@ class RedisStoreTest {
         store.set("live", "1");
         store.set("dead", "2", 100);
         Thread.sleep(200);
-        store.evictExpiredKeys(); // sweep first
+        store.evictExpiredKeys();
         assertEquals(1, store.dbSize());
     }
 }
