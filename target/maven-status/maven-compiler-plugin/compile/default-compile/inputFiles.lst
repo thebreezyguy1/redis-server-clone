@@ -3,5 +3,6 @@
 /Users/thebreezyguy/redis-server/src/main/java/com/redis/core/RedisStore.java
 /Users/thebreezyguy/redis-server/src/main/java/com/redis/core/ValueEntry.java
 /Users/thebreezyguy/redis-server/src/main/java/com/redis/protocol/RespEncoder.java
+/Users/thebreezyguy/redis-server/src/main/java/com/redis/protocol/RespParser.java
 /Users/thebreezyguy/redis-server/src/main/java/com/redis/protocol/RespValue.java
 /Users/thebreezyguy/redis-server/src/main/java/com/redis/server/Main.java
