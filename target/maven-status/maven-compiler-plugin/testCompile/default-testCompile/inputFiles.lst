@@ -1,1 +1,2 @@
 /Users/thebreezyguy/redis-server/src/test/java/com/redis/core/RedisStoreTest.java
+/Users/thebreezyguy/redis-server/src/test/java/com/redis/protocol/RespEncoderTest.java
