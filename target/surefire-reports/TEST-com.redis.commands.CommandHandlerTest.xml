@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.redis.commands.CommandHandlerTest" time="1.752" tests="30" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/thebreezyguy/redis-server/target/test-classes:/Users/thebreezyguy/redis-server/target/classes:/Users/thebreezyguy/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar:/Users/thebreezyguy/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/Users/thebreezyguy/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/thebreezyguy/.m2/repository/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar:/Users/thebreezyguy/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/thebreezyguy/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar:/Users/thebreezyguy/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar:/Users/thebreezyguy/.m2/repository/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar:/Users/thebreezyguy/.m2/repository/org/mockito/mockito-junit-jupiter/5.8.0/mockito-junit-jupiter-5.8.0.jar:/Users/thebreezyguy/.m2/repository/org/mockito/mockito-core/5.8.0/mockito-core-5.8.0.jar:/Users/thebreezyguy/.m2/repository/net/bytebuddy/byte-buddy/1.14.10/byte-buddy-1.14.10.jar:/Users/thebreezyguy/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.10/byte-buddy-agent-1.14.10.jar:/Users/thebreezyguy/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/thebreezyguy/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/Users/thebreezyguy/.m2/repository/ch/qos/logback/logback-classic/1.4.14/logback-classic-1.4.14.jar:/Users/thebreezyguy/.m2/repository/ch/qos/logback/logback-core/1.4.14/logback-core-1.4.14.jar:"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="/Users/thebreezyguy/.sdkman/candidates/java/17.0.9-tem/lib"/>
+    <property name="sun.java.command" value="/Users/thebreezyguy/redis-server/target/surefire/surefirebooter-20260320143322289_3.jar /Users/thebreezyguy/redis-server/target/surefire 2026-03-20T14-33-22_205-jvmRun1 surefire-20260320143322289_1tmp surefire_0-20260320143322289_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/thebreezyguy/redis-server/target/test-classes:/Users/thebreezyguy/redis-server/target/classes:/Users/thebreezyguy/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar:/Users/thebreezyguy/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/Users/thebreezyguy/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/thebreezyguy/.m2/repository/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar:/Users/thebreezyguy/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/thebreezyguy/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar:/Users/thebreezyguy/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar:/Users/thebreezyguy/.m2/repository/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar:/Users/thebreezyguy/.m2/repository/org/mockito/mockito-junit-jupiter/5.8.0/mockito-junit-jupiter-5.8.0.jar:/Users/thebreezyguy/.m2/repository/org/mockito/mockito-core/5.8.0/mockito-core-5.8.0.jar:/Users/thebreezyguy/.m2/repository/net/bytebuddy/byte-buddy/1.14.10/byte-buddy-1.14.10.jar:/Users/thebreezyguy/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.10/byte-buddy-agent-1.14.10.jar:/Users/thebreezyguy/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/thebreezyguy/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar:/Users/thebreezyguy/.m2/repository/ch/qos/logback/logback-classic/1.4.14/logback-classic-1.4.14.jar:/Users/thebreezyguy/.m2/repository/ch/qos/logback/logback-core/1.4.14/logback-core-1.4.14.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/thebreezyguy"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2023-10-17"/>
+    <property name="java.home" value="/Users/thebreezyguy/.sdkman/candidates/java/17.0.9-tem"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/thebreezyguy/redis-server"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="surefire.real.class.path" value="/Users/thebreezyguy/redis-server/target/surefire/surefirebooter-20260320143322289_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="17.0.9+9"/>
+    <property name="user.name" value="thebreezyguy"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="26.3.1"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-17.0.9+9"/>
+    <property name="localRepository" value="/Users/thebreezyguy/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/yj/xc_j68wj4t3dtzqlcfpvjfsw0000gn/T/"/>
+    <property name="java.version" value="17.0.9"/>
+    <property name="user.dir" value="/Users/thebreezyguy/redis-server"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/thebreezyguy/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="17.0.9+9"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="existsReturnZeroForMissingKey" classname="com.redis.commands.CommandHandlerTest" time="0.008"/>
+  <testcase name="unknownCommandReturnsError" classname="com.redis.commands.CommandHandlerTest" time="0.005"/>
+  <testcase name="delNonExistentKey" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="keysWildcard" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="ttlNoExpiry" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="commandsAreCaseInsensitive" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="ttlMissingKey" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+  <testcase name="dbSizeReturnsCount" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+  <testcase name="echoNoArgsReturnsError" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="commandReturnsArray" classname="com.redis.commands.CommandHandlerTest" time="0.002"/>
+  <testcase name="setWithPxExpiry" classname="com.redis.commands.CommandHandlerTest" time="0.605"/>
+  <testcase name="expireInvalidSeconds" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="expireOnExistingKey" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="flushAllClearsStore" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="setAndGet" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="pingReturnsOk" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+  <testcase name="delExistingKeys" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+  <testcase name="echoReturnsMessage" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+  <testcase name="pingWithMessageEchoes" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="typeReturnsString" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+  <testcase name="existsCountsExistingKeys" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+  <testcase name="dbSizeEmptyStore" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+  <testcase name="keysNoMatch" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+  <testcase name="keysWithPattern" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="ttlWithExpiry" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="commandCountReturnsInteger" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+  <testcase name="expireOnMissingKey" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+  <testcase name="getReturnsNullForMissingKey" classname="com.redis.commands.CommandHandlerTest" time="0.001"/>
+  <testcase name="setWithExExpiry" classname="com.redis.commands.CommandHandlerTest" time="1.103"/>
+  <testcase name="setOverwritesExistingValue" classname="com.redis.commands.CommandHandlerTest" time="0.0"/>
+</testsuite>

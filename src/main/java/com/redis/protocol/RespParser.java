@@ -20,8 +20,16 @@ public class RespParser {
             case '$' -> {
                 int length = Integer.parseInt(readline(inputStream));
                 if (length == -1) yield RespValue.nullValue();
-                byte[] bytes = inputStream.readNBytes(length);
-                inputStream.read(); inputStream.read();
+
+                byte[] bytes = new byte[length];
+                int offset = 0;
+                while (offset < length) {
+                    int read = inputStream.read(bytes, offset, length - offset);
+                    if (read == -1) throw new IOException("Unexpected end of stream");
+                    offset += read;
+                }
+                inputStream.read(); // \r
+                inputStream.read(); // \n
                 yield RespValue.bulkString(new String(bytes));
             }
             case '*' -> {
@@ -32,7 +40,24 @@ public class RespParser {
                 }
                 yield RespValue.array(arr);
             }
-            default -> throw new IOException("Unknown RESP type: " + (char) data);
+            default -> {
+                StringBuilder sb = new StringBuilder();
+                sb.append((char) data);
+                while (true) {
+                    int b = inputStream.read();
+                    if (b == -1 || (char) b == '\r') break;
+                    sb.append((char) b);
+                }
+                inputStream.read(); // consume \n
+
+                // convert inline to an array of bulk strings
+                String[] parts = sb.toString().trim().split(" ");
+                List<RespValue> items = new ArrayList<>();
+                for (String part : parts) {
+                    items.add(RespValue.bulkString(part));
+                }
+                yield RespValue.array(items);
+            }
         };
     }
 

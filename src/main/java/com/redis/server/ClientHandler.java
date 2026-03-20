@@ -1,9 +1,8 @@
 package com.redis.server;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 
 import com.redis.commands.CommandDispatcher;
@@ -17,18 +16,21 @@ public class ClientHandler {
 
     public void handleClient(Socket client, CommandDispatcher dispatcher) {
         try (client) {
-            InputStream in = new BufferedInputStream(client.getInputStream());
-            OutputStream out = client.getOutputStream();
+
+            BufferedInputStream in = new BufferedInputStream(client.getInputStream(), 65536);
+            BufferedOutputStream out = new BufferedOutputStream(client.getOutputStream(), 65536);
 
             while (true) {
                 RespValue command = parser.parse(in);
                 if (command == null) break;
                 RespValue response = dispatcher.dispatch(command);
-                out.write(encoder.encodeToBytes(response));
-                out.flush();
+                encoder.encodeTo(response, out);
+                if (in.available() == 0) {
+                    out.flush();
+                }
             }
 
-            System.out.println("Client disconnected: " + client.getInetAddress());
+            // System.out.println("Client disconnected: " + client.getInetAddress());
         } catch (IOException e) {
             System.err.println("Client error: " + e.getMessage());
         }

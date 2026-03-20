@@ -231,9 +231,10 @@ class RespParserTest {
     }
 
     @Test
-    void parse_unknown_type_throws_exception() {
-        // '!' is not a valid RESP type byte
-        assertThrows(IOException.class, () -> parser.parse(toStream("!invalid\r\n")));
+    void parse_unknown_type_treats_as_inline() throws IOException {
+        RespValue result = parser.parse(toStream("!invalid\r\n"));
+        assertEquals(RespValue.Type.ARRAY, result.getType());
+        assertEquals("!invalid", result.getArrayValue().get(0).getStrValue());
     }
 
     // ── ROUND TRIP ──────────────────────────────────────────────────────

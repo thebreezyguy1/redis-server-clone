@@ -1,6 +1,7 @@
 package com.redis.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -94,7 +95,11 @@ public class RedisStore {
 
     public boolean expire(String key, long seconds) {
         ValueEntry entry = store.get(key);
-        if (entry == null || isExpired(key)) return false;
+        if (entry == null) return false;
+        if (entry.getExpiresAt() != -1 && System.currentTimeMillis() > entry.getExpiresAt()) {
+            store.remove(key);
+            return false;
+        }
         entry.setExpiresAt(System.currentTimeMillis() + (seconds * 1000));
         return true;
     }
@@ -124,6 +129,10 @@ public class RedisStore {
                 store.remove(entry.getKey());
             }
         }
+    }
+
+    public Map<String, ValueEntry> getSnapshot() {
+        return new HashMap<>(store);
     }
 
     public void flushAll() {

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.redis.commands.CommandHandlerTest
+-------------------------------------------------------------------------------
+Tests run: 30, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.752 s -- in com.redis.commands.CommandHandlerTest
